@@ -1,7 +1,7 @@
 # ServerForm
 
 ## About
-This is a collection of playbooks and roles for my servers.
+This is a collection of playbooks and roles for server managment.
 
 ## Requirement
 - [Python](https://www.python.org): 3.8
