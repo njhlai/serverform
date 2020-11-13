@@ -1,0 +1,26 @@
+---
+# Pihole installation
+- name: Check if already exists
+  stat:
+    path: /usr/local/bin/pihole
+  register: pihole
+
+- name: Install
+  include_tasks: install.yml
+  when: not pihole.stat.exists
+
+- name: Creates a cronjob in /etc/cron.d to update gravity
+  become: true
+  cron:
+    name: weekly gravity updater
+    user: "{{ ansible_user_id }}"
+    weekday: "0"
+    hour: "4"
+    minute: "0"
+    job: "PATH="$PATH:/usr/sbin:/usr/local/bin/" pihole updateGravity | tail | curl -fsS --retry 5 --data-binary @- {{ hcio_ping }}"
+    cron_file: gravity
+
+- name: Update
+  command: /usr/local/bin/pihole -up
+  register: result
+  changed_when: "'Everything is up to date!' not in result.stdout"

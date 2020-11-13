@@ -1,0 +1,24 @@
+---
+# log2ram installation
+- name: Insert required repo into sources.list.d
+  lineinfile:
+    path: /etc/apt/sources.list.d/azlux.list
+    line: "deb http://packages.azlux.fr/debian/ buster main"
+    create: true
+    mode: 0644
+
+- name: Import GPG key for repo
+  become: true
+  apt_key:
+    url: https://azlux.fr/repo.gpg.key
+    state: present
+  notify: aptcacheupdate
+
+- name: Force apt cache update if needed
+  meta: flush_handlers
+
+- name: Install/Update
+  become: true
+  apt:
+    name: log2ram
+    state: latest

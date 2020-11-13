@@ -1,0 +1,28 @@
+---
+# actual pihole installation yoga
+- name: Clone git repo for installation
+  git:
+    repo: https://github.com/pi-hole/pi-hole.git
+    dest: /tmp/pi-hole
+    version: master
+    depth: 1
+
+- name: Copies template setup configuration if one doesn't exists
+  become: true
+  copy:
+    src: backup/setupVars.conf
+    dest: /etc/pihole/setupVars.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Run install script unattended
+  become: true
+  command:
+    cmd: 'bash /tmp/pi-hole/automated\ install/basic-install.sh --unattended'
+    creates: /usr/local/bin/pihole
+
+- name: Clean git repo
+  file:
+    path: /tmp/pi-hole
+    state: absent
