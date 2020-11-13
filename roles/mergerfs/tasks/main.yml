@@ -1,4 +1,5 @@
 ---
+# mergerfs installation and configuration
 - name: Install mergerfs and fuse
   become: true
   apt:
