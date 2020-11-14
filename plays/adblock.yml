@@ -1,5 +1,5 @@
 ---
-- name: pihole configuration
+- name: Pi-hole configuration
   hosts: adblock
 
   pre_tasks:

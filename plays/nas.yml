@@ -1,5 +1,5 @@
 ---
-- name: nas configuration
+- name: NAS configuration
   hosts: nas
 
   pre_tasks:
