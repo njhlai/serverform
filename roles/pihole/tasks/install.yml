@@ -7,10 +7,10 @@
     version: master
     depth: 1
 
-- name: Copies template setup configuration if one doesn't exists
+- name: Copies setup configuration if one doesn't exists
   become: true
   copy:
-    src: backup/setupVars.conf
+    src: "{{ setup_conf }}"
     dest: /etc/pihole/setupVars.conf
     owner: root
     group: root
