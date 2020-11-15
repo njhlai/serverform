@@ -1,0 +1,12 @@
+# sublime
+*.sublime-project
+*.sublime-workspace
+
+# molecule
+**/molecule/*
+
+# personal server config
+serverlist.yml
+
+# personal assets
+backup/
