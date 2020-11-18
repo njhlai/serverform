@@ -1,5 +1,5 @@
 ---
-# Pihole installation
+# pihole: Role for Pi-hole
 - name: Check if already exists
   stat:
     path: /usr/local/bin/pihole

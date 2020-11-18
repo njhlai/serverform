@@ -1,0 +1,60 @@
+---
+# rsnapshot config options
+# rsnapshot_config_snapshot_root:
+rsnapshot_config_intervals:
+  - name: hourly
+    value: 24
+  - name: daily
+    value: 7
+  - name: weekly
+    value: 4
+  - name: monthly
+    value: 12
+rsnapshot_config_verbose: 2
+rsnapshot_config_loglevel: 3
+rsnapshot_config_rsync_long_args: '--delete --numeric-ids --relative --delete-excluded --rsync-path=rsync-wrapper.sh'
+rsnapshot_config_include: []
+rsnapshot_config_exclude:
+  - 'temp.*'
+  - '*~'
+  - '.*~'
+  - '*.tmp'
+  - '.Trash-*'
+  - '.gvfs'
+  - '/dev/**'
+  - '/proc/**'
+  - '/sys/**'
+  - '/run/**'
+  - '/tmp/**'
+  - '/lost+found/**'
+
+# snapshot crontab settings
+rsnapshot_crontab:
+  # - name: hourly snapshot
+  #   month: '*'
+  #   weekday: '*'
+  #   day: '*'
+  #   hour: '*/4'
+  #   minute: 0
+  #   job: "/usr/bin/rsnapshot hourly"
+  # - name: daily snapshot
+  #   month: '*'
+  #   weekday: '*'
+  #   day: '*'
+  #   hour: 4
+  #   minute: 0
+  #   job: "/usr/bin/rsnapshot daily"
+  - name: weekly snapshot
+    month: '*'
+    weekday: 6
+    day: '*'
+    hour: 4
+    minute: 0
+    job: "/usr/bin/rsnapshot weekly"
+  - name: monthly snapshot
+    month: '*'
+    weekday: '*'
+    day: 1
+    hour: 4
+    minute: 0
+    job: "/usr/bin/rsnapshot monthly"

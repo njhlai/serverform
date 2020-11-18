@@ -1,0 +1,31 @@
+---
+# bminor: Role for backing up to bmajor host
+- name: Install rsync
+  become: true
+  apt:
+    name: rsync
+    state: present
+
+- name: Add a backup system user
+  become: true
+  user:
+    name: bminor
+    comment: backup system user
+    shell: /bin/bash
+    update_password: on_create
+
+- name: Configure sudo for backup system user
+  become: true
+  lineinfile:
+    path: /etc/sudoers.d/bminor-rsync-nopasswd
+    create: yes
+    state: present
+    owner: root
+    group: root
+    mode: 0440
+    line: 'bminor ALL=(ALL) NOPASSWD: /usr/bin/rsync'
+    validate: /usr/sbin/visudo -cf %s
+
+- name: SSH configuration
+  include_tasks: config.yml
+  when: bmajor_host is defined

@@ -1,0 +1,49 @@
+---
+# disks and mergerfs pool configuration
+- name: Partition disks
+  become: true
+  parted:
+    device: "/dev/disk/by-id/ata-{{ item.name }}"
+    number: 1
+    label: gpt
+    # fstype: "{{ item.fs }}" # only in >= v2.10
+    state: present 
+  with_items: "{{ disks }}"
+
+- name: Format disks
+  become: true
+  filesystem:
+    dev: "/dev/disk/by-id/ata-{{ item.name }}-part1"
+    fstype: "{{ item.fs }}"
+  with_items: "{{ disks }}"
+
+- name: Create /mnt points
+  become: true
+  file:
+    dest: "{{ item.mnt }}"
+    state: directory
+    owner: nobody
+    group: nogroup
+    mode: 0777
+  with_items:
+    - "{{ fspools }}"
+    - "{{ disks }}"
+
+- name: Mount disks
+  become: true
+  mount:
+    path: "{{ item.mnt }}"
+    src: "/dev/disk/by-id/ata-{{ item.name }}-part1"
+    fstype: "{{ item.fs }}"
+    state: mounted
+  with_items: "{{ disks }}"
+
+- name: Mount pools
+  become: true
+  mount:
+    path: "{{ item.mnt }}"
+    src: "{{ item.src }}"
+    opts: "use_ino,{{ mergerfscache }},dropcacheonclose=true,category.create=mfs,allow_other,minfreespace=50G,fsname=mergerfs"
+    fstype: fuse.mergerfs
+    state: mounted
+  with_items: "{{ fspools }}"

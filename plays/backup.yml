@@ -1,6 +1,6 @@
 ---
-- name: NAS configuration
-  hosts: nas
+- name: Backup server configuration
+  hosts: backup
 
   pre_tasks:
     - name: Update apt cache
@@ -10,5 +10,4 @@
         upgrade: "yes"
 
   roles:
-    - mergerfs
-    - bminor
+    - bmajor

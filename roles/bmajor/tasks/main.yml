@@ -1,0 +1,5 @@
+---
+# bmajor: Role for backup server
+- import_tasks: rsnapshot.yml
+
+- import_tasks: config.yml

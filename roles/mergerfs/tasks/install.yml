@@ -1,0 +1,22 @@
+---
+# mergerfs installation
+- name: Install mergerfs and fuse
+  become: true
+  apt:
+    name: ['mergerfs', 'fuse']
+    state: present
+
+- name: Get package info
+  package_facts:
+    manager: apt
+
+- name: Set caching option
+  set_fact:
+    mergerfscache: "{{ 'cache.files=off' if ansible_facts.packages['mergerfs'][0].version is version('2.28', '>=') else 'direct_io'}}"
+
+- name: Install xfsprogs for xfs
+  become: true
+  apt:
+    name: xfsprogs
+    state: present
+  when: '"xfs" in disks|map(attribute="fs")|list'

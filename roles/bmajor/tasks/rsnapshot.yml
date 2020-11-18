@@ -1,0 +1,32 @@
+---
+# rsnapshot installation
+- name: Install rsnapshot
+  become: true
+  apt:
+    name: rsnapshot
+    state: present
+    
+# rsnapshot configuration
+- name: Install rsnapshot config
+  become: true
+  template:
+    src: rsnapshot.conf.j2
+    dest: /etc/rsnapshot.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: Creates a cronjob in /etc/cron.d to run rsnapshot
+  become: true
+  cron:
+    name: "{{ item.name }}"
+    user: root
+    month: "{{ item.get('month', '*') }}"
+    weekday: "{{ item.get('weekday', '*') }}"
+    day: "{{ item.get('day', '*') }}"
+    hour: "{{ item.get('hour', '*') }}"
+    minute: "{{ item.get('minute', '*') }}"
+    job: "{{ item.job }}"
+    cron_file: rsnapshot
+  with_items: "{{ rsnapshot_crontab }}"

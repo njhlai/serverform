@@ -1,0 +1,26 @@
+---
+# Config SSH for backup pulling
+- name: Install the 'rsync-wrapper.sh' script, called by bmajor
+  become: true
+  copy:
+    src: rsync-wrapper.sh 
+    dest: /usr/local/bin/rsync-wrapper.sh
+    owner: root 
+    group: root 
+    mode: 0755
+
+- name: Retrieve the SSH public key on bmajor
+  delegate_to: bmajor_host
+  remote_user: root
+  command: "cat $HOME/.ssh/{{ rsnapshot_master_ssh_key }}.pub"
+  register: bmajor_ssh_pubkey
+  changed_when: False
+  always_run: True
+
+- name: Set the SSH public key for the backup system user
+  become: true
+  authorized_key:
+    user: bminor
+    state: present
+    key: "{{ bmajor_ssh_pubkey.stdout }}"
+    key_options: "no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding"
