@@ -1,0 +1,19 @@
+---
+# samba: Role for Samba
+- name: Install samba
+  become: true
+  apt:
+    name: ['samba', 'samba-common']
+    state: present
+  notify: startsamba
+
+- name: Install samba config
+  become: true
+  template:
+    src: smb.conf.j2
+    dest: /etc/samba/smb.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify: restartsamba

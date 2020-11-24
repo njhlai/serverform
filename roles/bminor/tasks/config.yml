@@ -14,8 +14,8 @@
   remote_user: root
   command: "cat $HOME/.ssh/{{ rsnapshot_master_ssh_key }}.pub"
   register: bmajor_ssh_pubkey
-  changed_when: False
-  always_run: True
+  changed_when: false
+  always_run: true
 
 - name: Set the SSH public key for the backup system user
   become: true

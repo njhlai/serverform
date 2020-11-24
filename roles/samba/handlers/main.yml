@@ -1,0 +1,14 @@
+---
+# handlers file for samba
+- name: startsamba
+  become: true
+  service: 
+    name: smbd
+    state: started
+    enabled: yes
+
+- name: restartsamba
+  become: true
+  service:
+    name: smbd
+    state: restarted

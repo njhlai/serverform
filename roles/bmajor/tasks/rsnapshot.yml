@@ -30,3 +30,4 @@
     job: "{{ item.job }}"
     cron_file: rsnapshot
   with_items: "{{ rsnapshot_crontab }}"
+  when: online
