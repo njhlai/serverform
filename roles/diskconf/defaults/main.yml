@@ -1,0 +1,7 @@
+---
+# diskconf SMART reporting options
+logfile: /tmp/smart_report.tmp
+tempWarn: 40
+tempCrit: 45
+sectorsCrit: 10
+testAgeWarn: 7

@@ -10,3 +10,6 @@ serverlist.yml
 
 # personal assets
 backup/
+
+# Don't add other's script
+roles/diskconf/files/disk-burnin.sh

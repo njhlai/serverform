@@ -10,6 +10,7 @@
         upgrade: "yes"
 
   roles:
+    - diskconf
     - mergerfs
     - bminor
     - samba

@@ -14,6 +14,7 @@ Supply ServerForm with an Ansible-acceptable inventory file (see [Ansible's docu
 Here are the roles which have been implemented:
 - [bmajor](https://github.com/njhlai/serverform/tree/master/roles/bmajor): Configures bmajor hosts for bminor servers, which pulls backups from bminor servers via [rsnapshot](https://rsnapshot.org).
 - [bminor](https://github.com/njhlai/serverform/tree/master/roles/bminor): Specifies backup strategy to bmajor hosts via [rsync](https://rsync.samba.org).
+- [diskconf](https://github.com/njhlai/serverform/tree/master/roles/diskconf): Configures disk by partitioning and formatting, and installs [Keith Nash's disk burn-in script](https://github.com/Spearfoot/disk-burnin-and-testing) and a SMART reporting script [which is based on this](https://www.truenas.com/community/threads/scripts-to-report-smart-zpool-and-ups-status-hdd-cpu-t%C2%B0-hdd-identification-and-backup-the-config.27365/).
 - [log2ram](https://github.com/njhlai/serverform/tree/master/roles/log2ram): Configures [log2ram](https://github.com/azlux/log2ram), a ramlog for systemd, to prevent log-writing to SD cards.
 - [mergerfs](https://github.com/njhlai/serverform/tree/master/roles/mergerfs): Configures [mergerfs](https://github.com/trapexit/mergerfs), a union filesystem that pools access across multiple drives.
 - [pihole](https://github.com/njhlai/serverform/tree/master/roles/pihole): Configures [Pi-hole](https://pi-hole.net), a DNS adblocker on ARM-based boards.
