@@ -1,0 +1,9 @@
+---
+# handlers for mpd
+- name: enablereloadmpd
+  ansible.builtin.systemd:
+    name: mpd.service
+    enabled: yes
+    masked: no
+    scope: user
+    state: reloaded

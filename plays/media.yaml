@@ -1,0 +1,13 @@
+---
+- name: Media server configuration
+  hosts: media
+
+  pre_tasks:
+    - name: Update apt cache
+      become: true
+      apt:
+        cache_valid_time: 3600
+        upgrade: "yes"
+
+  roles:
+    - mpd

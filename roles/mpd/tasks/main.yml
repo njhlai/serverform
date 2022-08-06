@@ -1,0 +1,18 @@
+---
+# mpd installation
+- name: Install mpd
+  become: true
+  apt:
+    name: mpd
+    state: present
+
+# mpd configuration
+- name: Install mpd config
+  template:
+    src: mpd.conf.j2
+    dest: "{{ mpd_config }}/mpd.conf"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+    backup: yes
+  notify: enablereloadmpd
