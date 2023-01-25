@@ -12,7 +12,8 @@ rsnapshot_config_intervals:
     value: 12
 rsnapshot_config_verbose: 2
 rsnapshot_config_loglevel: 3
-rsnapshot_config_rsync_long_args: '--delete --numeric-ids --relative --delete-excluded --rsync-path=rsync-wrapper.sh'
+rsnapshot_config_rsync_long_args: >-
+  --delete --numeric-ids --relative --delete-excluded --rsync-path=rsync-wrapper.sh
 rsnapshot_config_include: []
 rsnapshot_config_exclude:
   - 'temp.*'

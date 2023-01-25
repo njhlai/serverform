@@ -5,10 +5,21 @@ A server configuration, deployment and management automation via infrastructure-
 
 ## Requirements
 - [Python](https://www.python.org): 3.8
-- [Ansible](https://www.ansible.com): 2.4
+- [Ansible](https://www.ansible.com): ansible-core 2.10
+
+## Setup
+Install required community Ansible collections from [Ansible Galaxy](https://galaxy.ansible.com/):
+```sh
+ansible-galaxy collection install -r requirements.yml
+```
 
 ## Usage
 Supply ServerForm with an Ansible-acceptable inventory file (see [Ansible's documentation for inventory](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)) which details your server setup and specify the path via the `INVENTORY` argument in `ansible.cfg`.
+
+To run a playbook:
+```sh
+ansible-playbook --diff plays/[PLAYBOOK].yml
+```
 
 ## Roles
 Here are the roles which have been implemented:

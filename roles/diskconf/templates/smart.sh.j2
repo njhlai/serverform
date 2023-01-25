@@ -9,10 +9,10 @@ ping="{{ hcio_ping }}"
 {% endif %}
 subject="SMART Status Report for Drives in {{ ansible_hostname }}"
 drives="{{ disks | map(attribute='name') | join(' ') }}"
-tempWarn={{ tempWarn }}
-tempCrit={{ tempCrit }}
-sectorsCrit={{ sectorsCrit }}
-testAgeWarn={{ testAgeWarn }}
+tempWarn={{ temp_warn }}
+tempCrit={{ temp_crit }}
+sectorsCrit={{ sectors_crit }}
+testAgeWarn={{ test_age_warn }}
 warnSymbol="?"
 critSymbol="!"
 

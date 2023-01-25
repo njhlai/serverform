@@ -1,5 +1,6 @@
 ---
-- name: aptcacheupdate
+- name: Update apt cache
   become: true
-  apt:
+  ansible.builtin.apt:
     update_cache: true
+  listen: aptcacheupdate

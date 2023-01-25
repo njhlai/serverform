@@ -2,18 +2,18 @@
 # disks configuration
 - name: Partition disks
   become: true
-  parted:
+  community.general.parted:
     device: "/dev/disk/by-id/ata-{{ item.name }}"
     number: 1
     label: gpt
-    # fstype: "{{ item.fs }}" # only in >= v2.10
+    fstype: "{{ item.fs }}"
     state: present
   when: item.new
   with_items: "{{ disks }}"
 
 - name: Format disks
   become: true
-  filesystem:
+  community.general.filesystem:
     dev: "/dev/disk/by-id/ata-{{ item.name }}-part1"
     fstype: "{{ item.fs }}"
   when: item.new
@@ -22,7 +22,7 @@
 
 - name: Create /mnt points for disks
   become: true
-  file:
+  ansible.builtin.file:
     dest: "{{ item.mnt }}"
     state: directory
     owner: nobody
@@ -33,7 +33,7 @@
 
 - name: Mount disks
   become: true
-  mount:
+  ansible.posix.mount:
     path: "{{ item.mnt }}"
     src: "/dev/disk/by-id/ata-{{ item.name }}-part1"
     fstype: "{{ item.fs }}"

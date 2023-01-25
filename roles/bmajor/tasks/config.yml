@@ -2,8 +2,8 @@
 # SSH configuration
 - name: Create SSH key for server
   become: true
-  user:
+  ansible.builtin.user:
     name: root
-    generate_ssh_key: yes
+    generate_ssh_key: true
     ssh_key_file: .ssh/id_ed25519
     ssh_key_type: ed25519

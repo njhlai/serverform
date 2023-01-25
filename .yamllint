@@ -2,6 +2,9 @@
 extends: default
 
 rules:
+  line-length:
+    max: 85
+    allow-non-breakable-inline-mappings: true
   new-line-at-end-of-file: disable
   new-lines:
     type: unix

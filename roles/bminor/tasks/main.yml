@@ -2,13 +2,13 @@
 # bminor: Role for backing up to bmajor host
 - name: Install rsync
   become: true
-  apt:
+  ansible.builtin.apt:
     name: rsync
     state: present
 
 - name: Add a backup system user
   become: true
-  user:
+  ansible.builtin.user:
     name: bminor
     comment: backup system user
     shell: /bin/bash
@@ -16,9 +16,9 @@
 
 - name: Configure sudo for backup system user
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/sudoers.d/bminor-rsync-nopasswd
-    create: yes
+    create: true
     state: present
     owner: root
     group: root
@@ -27,5 +27,6 @@
     validate: /usr/sbin/visudo -cf %s
 
 - name: SSH configuration
-  include_tasks: config.yml
+  ansible.builtin.include_tasks:
+    file: config.yml
   when: bmajor_host is defined

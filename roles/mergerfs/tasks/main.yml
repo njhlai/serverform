@@ -1,5 +1,9 @@
 ---
 # mergerfs: Role for mergerfs
-- import_tasks: install.yml
+- name: Import installation tasks
+  ansible.builtin.import_tasks:
+    file: install.yml
 
-- import_tasks: config.yml
+- name: Import pool configuration tasks
+  ansible.builtin.import_tasks:
+    file: config.yml

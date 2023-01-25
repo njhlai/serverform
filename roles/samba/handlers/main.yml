@@ -1,14 +1,17 @@
 ---
 # handlers file for samba
-- name: startsamba
+- name: Start Samba service
   become: true
-  service: 
+  ansible.builtin.service:
     name: smbd
     state: started
-    enabled: yes
+    enabled: true
+    masked: false
+  listen: startsamba
 
-- name: restartsamba
+- name: Restart Samba service
   become: true
-  service:
+  ansible.builtin.service:
     name: smbd
     state: restarted
+  listen: restartsamba

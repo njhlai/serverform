@@ -8,8 +8,8 @@
 # personal server config
 serverlist.yml
 
-# personal assets
-backup/
+# personal local collection cache
+collections/
 
 # Don't add other's script
 roles/diskconf/files/disk-burnin.sh

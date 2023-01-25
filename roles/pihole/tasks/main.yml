@@ -1,26 +1,28 @@
 ---
 # pihole: Role for Pi-hole
-- name: Check if already exists
-  stat:
+- name: Check if Pi-hole is present
+  ansible.builtin.stat:
     path: /usr/local/bin/pihole
   register: pihole
 
-- name: Install
-  include_tasks: install.yml
+- name: Install Pi-hole
+  ansible.builtin.include_tasks:
+    file: install.yml
   when: not pihole.stat.exists
 
 - name: Creates a cronjob in /etc/cron.d to update gravity
   become: true
-  cron:
+  ansible.builtin.cron:
     name: weekly gravity updater
     user: "{{ ansible_user_id }}"
     weekday: "0"
     hour: "4"
     minute: "0"
-    job: "PATH="$PATH:/usr/sbin:/usr/local/bin/" pihole updateGravity | tail | curl -fsS --retry 5 --data-binary @- {{ hcio_ping }}"
+    job: "PATH='$PATH:/usr/sbin:/usr/local/bin/' pihole updateGravity | tail | curl -fsS --retry 5 --data-binary @- {{ hcio_ping }}"
     cron_file: gravity
 
-- name: Update
-  command: /usr/local/bin/pihole -up
+- name: Update Pi-hole
+  ansible.builtin.command:
+    cmd: /usr/local/bin/pihole -up
   register: result
   changed_when: "'Everything is up to date!' not in result.stdout"

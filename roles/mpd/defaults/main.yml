@@ -1,6 +1,6 @@
 ---
 # mpd config options
-mpd_config: "/home/{{ ansible_user }}/.config/mpd/"
+mpd_config: "/home/{{ ansible_user }}/.config/mpd"
 mpd_port: 8000
-# mpd_user: nobody
-# mpd_group: nogroup
+mpd_user:
+mpd_group:

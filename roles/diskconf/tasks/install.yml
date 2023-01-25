@@ -2,35 +2,36 @@
 # installation of prerequistes and scripts
 - name: Install e2fsprogs and smartmontools
   become: true
-  apt:
+  ansible.builtin.apt:
     name: ['e2fsprogs', 'smartmontools']
     state: present
 
 - name: Ensure directory for scripts exists
-  file:
-    dest: ~/.scripts/
+  ansible.builtin.file:
+    path: ~/.scripts/
     state: directory
+    mode: 0777
 
 # TODO: Get script direct from github
 - name: Install disk burn-in script
-  copy:
+  ansible.builtin.copy:
     src: disk-burnin.sh
     dest: ~/.scripts/disk-burnin.sh
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-    mode: 0775
+    mode: 0774
 
 - name: Install SMART-reporting script
-  template:
+  ansible.builtin.template:
     src: smart.sh.j2
     dest: ~/.scripts/smart.sh
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-    mode: 0775
+    mode: 0774
 
 - name: Creates a cronjob in /etc/cron.d to report SMART status
   become: true
-  cron:
+  ansible.builtin.cron:
     name: weekly SMART reporting
     user: root
     weekday: "1"

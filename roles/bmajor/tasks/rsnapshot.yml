@@ -2,24 +2,24 @@
 # rsnapshot installation
 - name: Install rsnapshot
   become: true
-  apt:
+  ansible.builtin.apt:
     name: rsnapshot
     state: present
 
 # rsnapshot configuration
 - name: Install rsnapshot config
   become: true
-  template:
+  ansible.builtin.template:
     src: rsnapshot.conf.j2
     dest: /etc/rsnapshot.conf
     owner: root
     group: root
     mode: 0644
-    backup: yes
+    backup: true
 
 - name: Creates a cronjob in /etc/cron.d to run rsnapshot
   become: true
-  cron:
+  ansible.builtin.cron:
     name: "{{ item.name }}"
     user: root
     month: "{{ item.get('month', '*') }}"

@@ -1,6 +1,7 @@
 ---
-- name: diskburnintest
-  script:
+- name: Run disk burn-in test
+  ansible.builtin.script:
     cmd: "~/.script/disk-burnin.sh -f -o ~/burn-in-logs /dev/disk/by-id/ata-{{ item.name }}-part1"
   when: item.new
   with_items: "{{ disks }}"
+  listen: diskburnintest

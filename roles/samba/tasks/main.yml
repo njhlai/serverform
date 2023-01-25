@@ -1,19 +1,19 @@
 ---
 # samba: Role for Samba
-- name: Install samba
+- name: Install Samba
   become: true
-  apt:
+  ansible.builtin.apt:
     name: ['samba', 'samba-common']
     state: present
   notify: startsamba
 
-- name: Install samba config
+- name: Install Samba config
   become: true
-  template:
+  ansible.builtin.template:
     src: smb.conf.j2
     dest: /etc/samba/smb.conf
     owner: root
     group: root
     mode: 0644
-    backup: yes
+    backup: true
   notify: restartsamba

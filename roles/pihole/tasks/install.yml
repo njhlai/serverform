@@ -1,7 +1,7 @@
 ---
 # actual pihole installation yoga
 - name: Clone git repo for installation
-  git:
+  ansible.builtin.git:
     repo: https://github.com/pi-hole/pi-hole.git
     dest: /tmp/pi-hole
     version: master
@@ -9,7 +9,7 @@
 
 - name: Copies setup configuration if one doesn't exists
   become: true
-  copy:
+  ansible.builtin.copy:
     src: "{{ setup_conf }}"
     dest: /etc/pihole/setupVars.conf
     owner: root
@@ -18,11 +18,11 @@
 
 - name: Run install script unattended
   become: true
-  command:
+  ansible.builtin.command:
     cmd: 'bash /tmp/pi-hole/automated\ install/basic-install.sh --unattended'
     creates: /usr/local/bin/pihole
 
 - name: Clean git repo
-  file:
+  ansible.builtin.file:
     path: /tmp/pi-hole
     state: absent

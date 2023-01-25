@@ -2,7 +2,7 @@
 # mergerfs pool configuration
 - name: Create /mnt points for pools
   become: true
-  file:
+  ansible.builtin.file:
     dest: "{{ item.mnt }}"
     state: directory
     owner: nobody
@@ -13,7 +13,7 @@
 
 - name: Mount pools
   become: true
-  mount:
+  ansible.posix.mount:
     path: "{{ item.mnt }}"
     src: "{{ item.src }}"
     opts: "use_ino,{{ mergerfscache }},dropcacheonclose=true,category.create=mfs,allow_other,minfreespace=50G,fsname=mergerfs"
