@@ -1,5 +1,5 @@
 ---
-# log2ram: Role for log2ram
+# log2ram: Role for Log2Ram
 - name: Insert required repo into sources.list.d
   lineinfile:
     path: /etc/apt/sources.list.d/azlux.list

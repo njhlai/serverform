@@ -3,10 +3,10 @@
 - name: Install the 'rsync-wrapper.sh' script, called by bmajor
   become: true
   copy:
-    src: rsync-wrapper.sh 
+    src: rsync-wrapper.sh
     dest: /usr/local/bin/rsync-wrapper.sh
-    owner: root 
-    group: root 
+    owner: root
+    group: root
     mode: 0755
 
 - name: Retrieve the SSH public key on bmajor

@@ -7,13 +7,13 @@
     state: present
 
 - name: Ensure directory for scripts exists
-  file: 
+  file:
     dest: ~/.scripts/
     state: directory
 
 # TODO: Get script direct from github
 - name: Install disk burn-in script
-  copy: 
+  copy:
     src: disk-burnin.sh
     dest: ~/.scripts/disk-burnin.sh
     owner: "{{ ansible_user }}"

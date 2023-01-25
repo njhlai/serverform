@@ -7,7 +7,7 @@
     number: 1
     label: gpt
     # fstype: "{{ item.fs }}" # only in >= v2.10
-    state: present 
+    state: present
   when: item.new
   with_items: "{{ disks }}"
 

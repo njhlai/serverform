@@ -111,8 +111,8 @@ ssh_args	-i /root/.ssh/id_ed25519
 # The include and exclude parameters, if enabled, simply get passed directly
 # to rsync. If you have multiple include/exclude patterns, put each one on a
 # separate line. Please look up the --include and --exclude options in the
-# rsync man page for more details on how to specify file name patterns. 
-# 
+# rsync man page for more details on how to specify file name patterns.
+#
 {% for include in rsnapshot_config_include %}
 include		{{ include }}
 {% endfor %}

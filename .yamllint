@@ -4,4 +4,4 @@ extends: default
 rules:
   new-line-at-end-of-file: disable
   new-lines:
-    type: dos
+    type: unix
