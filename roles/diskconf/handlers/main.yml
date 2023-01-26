@@ -1,4 +1,26 @@
 ---
+- name: Extract disk burn-in script
+  ansible.builtin.unarchive:
+    src: "{{ tar.dest }}"
+    dest: /tmp/disk-burnin/
+    remote_src: true
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0700
+  notify: installdiskburnin
+  listen: extractdiskburnin
+
+- name: Install disk burn-in script
+  ansible.builtin.copy:
+    src: "{{ tar.dest | replace('.tar.gz', '') | regex_replace('\\d+\\.\\d+\\.\\d+-\\d+-g', '') }}/disk-burnin.sh"
+    dest: ~/.scripts/disk-burnin.sh
+    remote_src: true
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0774
+    backup: true
+  listen: installdiskburnin
+
 - name: Run disk burn-in test
   ansible.builtin.script:
     cmd: "~/.script/disk-burnin.sh -f -o ~/burn-in-logs /dev/disk/by-id/ata-{{ item.name }}-part1"

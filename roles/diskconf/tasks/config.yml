@@ -20,6 +20,9 @@
   with_items: "{{ disks }}"
   notify: diskburnintest
 
+- name: Wait for disk-burnin to complete
+  ansible.builtin.meta: flush_handlers
+
 - name: Create /mnt points for disks
   become: true
   ansible.builtin.file:
