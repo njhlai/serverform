@@ -1,19 +1,5 @@
 ---
-# mergerfs installation
-- name: Install mergerfs and fuse
-  become: true
-  ansible.builtin.apt:
-    name: ['mergerfs', 'fuse']
-    state: present
-
-- name: Get package info
-  ansible.builtin.package_facts:
-    manager: apt
-
-- name: Set caching option
-  ansible.builtin.set_fact:
-    mergerfscache: "{{ 'cache.files=off' if ansible_facts.packages['mergerfs'][0].version is version('2.28', '>=') else 'direct_io' }}"
-
+# Filesystem utils installation
 - name: Install xfsprogs for xfs
   become: true
   ansible.builtin.apt:

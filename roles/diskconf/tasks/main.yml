@@ -1,10 +1,10 @@
 ---
-# mergerfs: Role for diskconf
-- name: Import scripts installation tasks
+# diskconf: Role for disks configuration
+- name: Import disk-burnin script installation tasks
   ansible.builtin.import_tasks:
     file: install.yml
 
-- name: Import disk configuration tasks
+- name: Configure disks
   ansible.builtin.import_tasks:
     file: config.yml
   when: diskconfig

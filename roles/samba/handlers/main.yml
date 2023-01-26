@@ -1,5 +1,4 @@
 ---
-# handlers file for samba
 - name: Start Samba service
   become: true
   ansible.builtin.service:

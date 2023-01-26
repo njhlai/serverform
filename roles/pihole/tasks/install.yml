@@ -1,5 +1,5 @@
 ---
-# actual pihole installation yoga
+# Pi-hole installation
 - name: Clone git repo for installation
   ansible.builtin.git:
     repo: https://github.com/pi-hole/pi-hole.git
@@ -7,7 +7,7 @@
     version: master
     depth: 1
 
-- name: Copies setup configuration if one doesn't exists
+- name: Configure Pi-Hole
   become: true
   ansible.builtin.copy:
     src: "{{ setup_conf }}"

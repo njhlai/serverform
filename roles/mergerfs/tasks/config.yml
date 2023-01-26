@@ -1,5 +1,5 @@
 ---
-# mergerfs pool configuration
+# Pool configuration
 - name: Create /mnt points for pools
   become: true
   ansible.builtin.file:

@@ -1,5 +1,5 @@
 ---
-# disks configuration
+# Disks configuration
 - name: Partition disks
   become: true
   community.general.parted:

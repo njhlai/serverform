@@ -2,7 +2,7 @@
 # bmajor: Role for backup server
 - name: Import rsnapshot installation tasks
   ansible.builtin.import_tasks:
-    file: rsnapshot.yml
+    file: install.yml
 
 - name: Import SSH configuration tasks
   ansible.builtin.import_tasks:

@@ -6,7 +6,6 @@
     name: rsnapshot
     state: present
 
-# rsnapshot configuration
 - name: Install rsnapshot config
   become: true
   ansible.builtin.template:

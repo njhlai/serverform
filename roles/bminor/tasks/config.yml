@@ -1,5 +1,5 @@
 ---
-# Config SSH for backup pulling
+# SSH configuration for backup pulling
 - name: Install the `rsync-wrapper.sh` script, called by bmajor
   become: true
   ansible.builtin.copy:

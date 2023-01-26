@@ -1,5 +1,5 @@
 ---
-# installation of prerequistes and scripts
+# Disk-burnin script installation
 - name: Install e2fsprogs and smartmontools
   become: true
   ansible.builtin.apt:
@@ -8,9 +8,9 @@
 
 - name: Ensure directory for scripts exists
   ansible.builtin.file:
-    path: ~/.scripts/
+    path: ~/.scripts
     state: directory
-    mode: 0777
+    mode: 0775
 
 # TODO: Get script direct from github
 - name: Install disk burn-in script

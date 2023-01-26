@@ -1,13 +1,12 @@
 ---
-# mpd installation
-- name: Install mpd
+# mpd: Role for MPD
+- name: Install MPD
   become: true
   ansible.builtin.apt:
     name: mpd
     state: present
 
-# mpd configuration
-- name: Install mpd config
+- name: Configure MPD
   ansible.builtin.template:
     src: mpd.conf.j2
     dest: "{{ mpd_config }}/mpd.conf"
@@ -15,4 +14,4 @@
     group: "{{ ansible_user }}"
     mode: 0644
     backup: true
-  notify: enablereloadmpd
+  notify: enablerestartmpd

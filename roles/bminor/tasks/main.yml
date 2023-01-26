@@ -26,7 +26,7 @@
     line: 'bminor ALL=(ALL) NOPASSWD: /usr/bin/rsync'
     validate: /usr/sbin/visudo -cf %s
 
-- name: SSH configuration
+- name: Configure SSH
   ansible.builtin.include_tasks:
     file: config.yml
   when: bmajor_host is defined

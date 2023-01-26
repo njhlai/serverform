@@ -14,7 +14,7 @@
     state: present
   notify: aptcacheupdate
 
-- name: Force apt cache update if needed
+- name: Wait for apt cache to update
   ansible.builtin.meta: flush_handlers
 
 - name: Install Log2Ram

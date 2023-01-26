@@ -1,10 +1,9 @@
 ---
-# handlers for mpd
-- name: Enable or reload mpd service
-  ansible.builtin.systemd:
+- name: Enable or restart MPD service
+  ansible.builtin.service:
     name: mpd.service
+    state: restarted
     enabled: true
     masked: false
     scope: user
-    state: restarted
-  listen: enablereloadmpd
+  listen: enablerestartmpd
