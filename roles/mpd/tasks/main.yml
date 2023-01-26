@@ -15,3 +15,6 @@
     mode: 0644
     backup: true
   notify: enablerestartmpd
+
+- name: Wait for MPD service to restart
+  ansible.builtin.meta: flush_handlers

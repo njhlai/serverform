@@ -17,3 +17,6 @@
     mode: 0644
     backup: true
   notify: restartsamba
+
+- name: Wait for Samba services to (re)start
+  ansible.builtin.meta: flush_handlers
