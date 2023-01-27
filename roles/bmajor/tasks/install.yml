@@ -21,11 +21,11 @@
   ansible.builtin.cron:
     name: "{{ item.name }}"
     user: root
-    month: "{{ item.get('month', '*') }}"
-    weekday: "{{ item.get('weekday', '*') }}"
-    day: "{{ item.get('day', '*') }}"
-    hour: "{{ item.get('hour', '*') }}"
-    minute: "{{ item.get('minute', '*') }}"
+    month: "{{ item.month | default('*') }}"
+    weekday: "{{ item.weekday | default('*') }}"
+    day: "{{ item.day | default('*') }}"
+    hour: "{{ item.hour | default('*') }}"
+    minute: "{{ item.minute | default('*') }}"
     job: "{{ item.job }}"
     cron_file: rsnapshot
   with_items: "{{ rsnapshot_crontab }}"

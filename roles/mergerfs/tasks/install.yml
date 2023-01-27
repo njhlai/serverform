@@ -5,4 +5,4 @@
   ansible.builtin.apt:
     name: xfsprogs
     state: present
-  when: '"xfs" in disks|map(attribute="fs")|list'
+  when: '"xfs" in disks | map(attribute="fs") | list'
