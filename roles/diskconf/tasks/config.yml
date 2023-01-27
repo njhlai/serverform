@@ -6,9 +6,8 @@
     device: "/dev/disk/by-id/ata-{{ item.name }}"
     number: 1
     label: gpt
-    fstype: "{{ item.fs }}"
+    fs_type: "{{ item.fs }}"
     state: present
-  when: item.new
   with_items: "{{ disks }}"
 
 - name: Format disks
@@ -16,9 +15,10 @@
   community.general.filesystem:
     dev: "/dev/disk/by-id/ata-{{ item.name }}-part1"
     fstype: "{{ item.fs }}"
-  when: item.new
+    state: present
   with_items: "{{ disks }}"
   notify: diskburnintest
+  register: formatted
 
 - name: Wait for disk-burnin to complete
   ansible.builtin.meta: flush_handlers

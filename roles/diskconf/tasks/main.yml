@@ -4,7 +4,6 @@
   ansible.builtin.import_tasks:
     file: install.yml
 
-- name: Configure disks
+- name: Import disks configuration tasks
   ansible.builtin.import_tasks:
     file: config.yml
-  when: diskconfig
