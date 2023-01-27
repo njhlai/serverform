@@ -2,9 +2,10 @@
 
 ### Parameters ###
 logfile="{{ logfile }}"
-{% if reporting_email is defined %}
+{% if reporting_email %}
 email="{{ reporting_email }}"
-{% else %}
+{% endif %}
+{% if hcio_ping %}
 ping="{{ hcio_ping }}"
 {% endif %}
 subject="SMART Status Report for Drives in {{ ansible_hostname }}"
@@ -16,7 +17,7 @@ testAgeWarn={{ test_age_warn }}
 warnSymbol="?"
 critSymbol="!"
 
-{% if reporting_email is defined %}
+{% if reporting_email %}
 ### Set email headers ###
 (
     echo "To: ${email}"
@@ -47,7 +48,7 @@ for drive in $drives
 do
     (
         /usr/sbin/smartctl -A -i -v 7,hex48 /dev/disk/by-id/ata-"$drive"-part1 | \
-        awk -v ping="$ping" -v tempWarn="$tempWarn" -v tempCrit="$tempCrit" -v sectorsCrit="$sectorsCrit" \
+        awk -v tempWarn="$tempWarn" -v tempCrit="$tempCrit" -v sectorsCrit="$sectorsCrit" \
         -v testAgeWarn="$testAgeWarn" -v warnSymbol="$warnSymbol" -v critSymbol="$critSymbol" \
         -v lastTestHours="$(/usr/sbin/smartctl -l selftest /dev/disk/by-id/ata-"$drive"-part1 | grep "# 1" | awk '{print $9}')" '\
         /Serial Number:/{serial=$3} \
@@ -104,7 +105,7 @@ sed -i -e '/=== START OF READ/d' "$logfile"
 sed -i -e '/SMART Attributes Data/d' "$logfile"
 sed -i -e '/Vendor Specific SMART/d' "$logfile"
 sed -i -e '/SMART Error Log Version/d' "$logfile"
-{% if reporting_email is defined %}
+{% if reporting_email %}
 (
     echo ""
     echo "</pre>"
@@ -112,9 +113,10 @@ sed -i -e '/SMART Error Log Version/d' "$logfile"
 {% endif %}
 
 ### Send report ###
-{% if reporting_email is defined %}
+{% if reporting_email %}
 sendmail -t < "$logfile"
-{% else %}
+{% endif %}
+{% if hcio_ping %}
 curl -fsS -m 10 --retry 5 --data-binary "@$logfile" "$ping"
 {% endif %}
 rm "$logfile"

@@ -10,10 +10,10 @@
 
 ## Browsing/Identification ###
 
-   workgroup = {{ ansible_hostname|upper }}
+   workgroup = {{ ansible_hostname | upper }}
    server string = %h server (Samba, Ubuntu)
    dns proxy = no
-   netbios name = {{ ansible_hostname|upper }}
+   netbios name = {{ ansible_hostname | upper }}
    security = {{ samba_security }}
 
 #### Networking ####
@@ -43,19 +43,15 @@
 ############ Misc ############
    load printers = no
 
-{% if fspools is defined %}
+{% if fspools %}
 #======================= Share Definitions =======================
 
-{%   for item in fspools %}
+{% for item in fspools %}
 [{{ item.name }}]
 path = {{ item.mnt }}
 browsable = yes
-{%     if item.read_only is defined %}
-read only = {{ item.ro|lower }}
-{%     endif %}
-writable = {{ item.writable|lower }}
+read only = {{ item.ro | lower }}
 valid users = {{ ansible_user }}
 guest ok = no
-
-{%   endfor %}
+{% endfor %}
 {% endif %}

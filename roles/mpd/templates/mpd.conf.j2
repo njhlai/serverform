@@ -66,7 +66,7 @@ log_file                        "syslog"
 # current user.
 #
 {% if mpd_user %}
-user    {{ mpd_user }}
+user                            {{ mpd_user }}
 {% else %}
 #user                           "nobody"
 {% endif %}
@@ -77,7 +77,7 @@ user    {{ mpd_user }}
 # have permission to use sound card.
 #
 {% if mpd_group %}
-user    {{ mpd_group }}
+user                            {{ mpd_group }}
 {% else %}
 #group                          "nogroup"
 {% endif %}
