@@ -1,0 +1,16 @@
+[Unit]
+Description=Soft Serve
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+Environment=SOFT_SERVE_PORT="{{ soft_serve_port }}"
+Environment=SOFT_SERVE_BIND_ADDRESS="{{ soft_serve_bind_address }}"
+Environment=SOFT_SERVE_KEY_PATH="{{ soft_serve_key_path }}"
+Environment=SOFT_SERVE_REPO_PATH="{{ soft_serve_repo }}"
+Environment=SOFT_SERVE_HOST="{{ ansible_hostname }}"
+ExecStart=/usr/bin/soft serve
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,15 @@
+---
+- name: Update apt cache
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+  listen: aptcacheupdate
+
+- name: Enable or restart Soft Serve service
+  ansible.builtin.service:
+    name: soft-serve.service
+    state: restarted
+    enabled: true
+    masked: false
+    scope: user
+  listen: enablerestartsoftserve

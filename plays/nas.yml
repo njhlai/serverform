@@ -13,4 +13,5 @@
     - diskconf
     - mergerfs
     - bminor
+    - softserve
     - samba

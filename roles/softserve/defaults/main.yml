@@ -1,0 +1,5 @@
+---
+soft_serve_port: 23231
+soft_serve_bind_address: 0.0.0.0
+soft_serve_key_path: "/home/{{ ansible_user }}/.ssh/soft_serve_server_ed25519"
+soft_serve_repo: /mnt/storage/repos

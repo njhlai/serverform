@@ -1,0 +1,50 @@
+---
+# softserve: Role for Soft Serve
+- name: Ensure repo directory exists
+  ansible.builtin.file:
+    path: "{{ soft_serve_repo }}"
+    state: directory
+    mode: 0755
+
+- name: Ensure keyring directory exists
+  become: true
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: 0755
+
+- name: Import GPG key for repo
+  become: true
+  ansible.builtin.get_url:
+    url: https://repo.charm.sh/apt/gpg.key
+    dest: /etc/apt/keyrings/charm.asc
+
+- name: Insert required repo into sources.list.d
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [signed-by=/etc/apt/keyrings/charm.asc] https://repo.charm.sh/apt/ * *
+    filename: charm
+    state: present
+    mode: 0644
+  notify: aptcacheupdate
+
+- name: Wait for apt cache to update
+  ansible.builtin.meta: flush_handlers
+
+- name: Install Soft Serve
+  become: true
+  ansible.builtin.apt:
+    name: soft-serve
+    state: present
+
+- name: Install service for Soft Serve
+  ansible.builtin.template:
+    src: soft-serve.service.j2
+    dest: "/home/{{ ansible_user }}/.config/systemd/user/soft-serve.service"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+  notify: enablerestartsoftserve
+
+- name: Wait for Soft Serve service to restart
+  ansible.builtin.meta: flush_handlers

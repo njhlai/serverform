@@ -1,0 +1,27 @@
+# The name of the server to show in the TUI.
+name: {{ soft_serve_name }}
+
+# The host and port to display in the TUI. You may want to change this if your
+# server is accessible from a different host and/or port that what it's
+# actually listening on (for example, if it's behind a reverse proxy).
+host: localhost
+port: {{ soft_server_port }}
+
+# Access level for anonymous users. Options are: admin-access, read-write,
+# read-only, and no-access.
+anon-access: no-access
+
+# You can grant read-only access to users without private keys.
+allow-keyless: false
+
+# Customize repo display in the menu
+repos:
+  - name: Home
+    repo: config
+    private: true
+    note: "Configuration and content repo for {{ soft_serve_name }}"
+    readme: README.md
+
+# Authorized users. Admins have full access to all repos. Private repos are only
+# accessible by admins and collab users. Regular users can read public repos
+# based on your anon-access setting.
