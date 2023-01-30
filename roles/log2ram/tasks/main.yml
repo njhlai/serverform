@@ -1,16 +1,18 @@
 ---
 # log2ram: Role for Log2Ram
 - name: Insert required repo into sources.list.d
-  ansible.builtin.lineinfile:
-    path: /etc/apt/sources.list.d/azlux.list
-    line: "deb http://packages.azlux.fr/debian/ buster main"
-    create: true
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/azlux.gpg] http://packages.azlux.fr/debian/ {{ ansible_distribution_release }} main"
+    filename: azlux
+    state: present
     mode: 0644
 
 - name: Import GPG key for repo
   become: true
   ansible.builtin.apt_key:
-    url: https://azlux.fr/repo.gpg.key
+    url: https://azlux.fr/repo.gpg
+    keyring: /etc/apt/trusted.gpg.d/azlux.gpg
     state: present
   notify: aptcacheupdate
 
