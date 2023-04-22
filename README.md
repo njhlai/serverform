@@ -30,8 +30,8 @@ Here are the roles which have been implemented:
 - [mergerfs](https://github.com/njhlai/serverform/tree/main/roles/mergerfs): Configures [mergerfs](https://github.com/trapexit/mergerfs), a union filesystem that pools access across multiple drives.
 - [mpd](https://github.com/njhlai/serverform/tree/main/roles/mpd): Configures [MPD](https://www.musicpd.org/), a server-side application for playing music.
 - [pihole](https://github.com/njhlai/serverform/tree/main/roles/pihole): Configures [Pi-hole](https://pi-hole.net), a DNS adblocker on ARM-based boards.
-- [samba](https://github.com/njhlai/serverform/tree/main/roles/samba): Configure [Samba](https://www.samba.org), a network file sharing using SMB protocol.
-- [softserve](https://github.com/njhlai/serverform/tree/main/roles/softserve): Configure [Soft Serve](https://github.com/charmbracelet/soft-serve), a lightweight self-hostable commandline-based Git server.
+- [samba](https://github.com/njhlai/serverform/tree/main/roles/samba): Configures [Samba](https://www.samba.org), a network file sharing using SMB protocol.
+- [softserve](https://github.com/njhlai/serverform/tree/main/roles/softserve): Configures [Soft Serve](https://github.com/charmbracelet/soft-serve), a lightweight self-hostable commandline-based Git server.
 
 ## Inspirations
 Here are some of wonderful implementations of which I based a lot of my roles on.
