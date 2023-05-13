@@ -1,27 +1,73 @@
-# The name of the server to show in the TUI.
-name: {{ soft_serve_name }}
+# This file is managed by Ansible, don't make changes here,
+# they will be overwritten.
+#################################################
+# config.yaml - Soft Serve Server configurations #
+#################################################
 
-# The host and port to display in the TUI. You may want to change this if your
-# server is accessible from a different host and/or port that what it's
-# actually listening on (for example, if it's behind a reverse proxy).
-host: localhost
-port: {{ soft_server_port }}
+# The name of the server.
+name: "{{ soft_serve_name }}"
 
-# Access level for anonymous users. Options are: admin-access, read-write,
-# read-only, and no-access.
-anon-access: no-access
+# Logging configuration.
+log:
+  # Log format to use. Valid values are "json", "logfmt", and "text".
+  format: "text"
 
-# You can grant read-only access to users without private keys.
-allow-keyless: false
+# The SSH server configuration.
+ssh:
+  # The address on which the SSH server will listen.
+  listen_addr: ":{{ soft_serve_ssh_port }}"
 
-# Customize repo display in the menu
-repos:
-  - name: Home
-    repo: config
-    private: true
-    note: "Configuration and content repo for {{ soft_serve_name }}"
-    readme: README.md
+  # The public URL of the SSH server.
+  # This is the address that will be used to clone repositories.
+  public_url: "ssh://{{ ansible_hostname }}:{{ soft_serve_ssh_port }}"
 
-# Authorized users. Admins have full access to all repos. Private repos are only
-# accessible by admins and collab users. Regular users can read public repos
-# based on your anon-access setting.
+  # The path to the SSH server's private key.
+  key_path: {{ soft_serve_server_key }}
+
+  # The path to the SSH server's client private key.
+  # This key will be used to authenticate the server to make git requests to
+  # ssh remotes.
+  client_key_path: {{ soft_serve_client_key }}
+
+  # The maximum number of seconds a connection can take.
+  # A value of 0 means no timeout.
+  max_timeout: 0
+
+  # The number of seconds a connection can be idle before it is closed.
+  idle_timeout: 300
+
+# The Git daemon configuration.
+git:
+  # The address on which the Git daemon will listen.
+  listen_addr: ":{{ soft_serve_git_port }}"
+
+  # The maximum number of seconds a connection can take.
+  # A value of 0 means no timeout.
+  max_timeout: 0
+
+  # The number of seconds a connection can be idle before it is closed.
+  idle_timeout: 20
+
+  # The maximum number of concurrent connections.
+  max_connections: 8
+
+# The HTTP server configuration.
+http:
+  # The address on which the HTTP server will listen.
+  listen_addr: ":{{ soft_serve_http_port }}"
+
+  # The path to the TLS private key.
+  tls_key_path: ""
+
+  # The path to the TLS certificate.
+  tls_cert_path: ""
+
+  # The public URL of the HTTP server.
+  # This is the address that will be used to clone repositories.
+  # Make sure to use https:// if you are using TLS.
+  public_url: "http://{{ ansible_hostname }}:{{ soft_serve_http_port }}"
+
+# The stats server configuration.
+stats:
+  # The address on which the stats server will listen.
+  listen_addr: ":{{ soft_serve_stats_port }}"

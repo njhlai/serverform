@@ -6,9 +6,10 @@
   listen: aptcacheupdate
 
 - name: Enable or restart Soft Serve service
-  ansible.builtin.service:
+  ansible.builtin.systemd:
     name: soft-serve.service
     state: restarted
+    daemon_reload: true
     enabled: true
     masked: false
     scope: user
