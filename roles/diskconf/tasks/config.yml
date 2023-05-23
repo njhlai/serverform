@@ -21,7 +21,7 @@
 - name: Create /mnt points for disks
   become: true
   ansible.builtin.file:
-    dest: "{{ item.mnt }}"
+    path: "{{ item.mnt }}"
     state: directory
     owner: nobody
     group: nogroup
@@ -37,3 +37,8 @@
     fstype: "{{ item.fs }}"
     state: mounted
   with_items: "{{ disks }}"
+  notify: ensurecorrectperms
+  register: mounted
+
+- name: Wait for mounted drives to have correct permissions
+  ansible.builtin.meta: flush_handlers

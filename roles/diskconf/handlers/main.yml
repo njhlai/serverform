@@ -1,0 +1,10 @@
+---
+- name: Ensure freshly mounted drives have correct permissions
+  ansible.builtin.file:
+    path: "{{ item.item.mnt }}"
+    state: directory
+    owner: nobody
+    group: nogroup
+    mode: 0777
+  with_items: "{{ mounted.results }}"
+  listen: ensurecorrectperms
