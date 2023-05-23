@@ -17,11 +17,6 @@
     fstype: "{{ item.fs }}"
     state: present
   with_items: "{{ disks }}"
-  notify: diskburnintest
-  register: formatted
-
-- name: Wait for disk-burnin to complete
-  ansible.builtin.meta: flush_handlers
 
 - name: Create /mnt points for disks
   become: true

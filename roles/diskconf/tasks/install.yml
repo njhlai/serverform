@@ -1,5 +1,5 @@
 ---
-# Disk-burnin script installation
+# Requirements and scripts installation
 - name: Install e2fsprogs and smartmontools
   become: true
   ansible.builtin.apt:
@@ -11,32 +11,6 @@
     path: ~/.scripts
     state: directory
     mode: 0775
-
-- name: Ensure directory for tar extraction exists
-  ansible.builtin.file:
-    path: /tmp/disk-burnin
-    state: directory
-    mode: 0700
-
-- name: Get latest release of disk burn-in script
-  ansible.builtin.uri:
-    url: https://api.github.com/repos/Spearfoot/disk-burnin-and-testing/releases/latest
-    return_content: true
-  check_mode: false
-  register: json_reponse
-
-- name: Download latest release of disk burn-in script
-  ansible.builtin.get_url:
-    url: "{{ json_reponse.json.tarball_url }}"
-    dest: /tmp/disk-burnin/
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0644
-  notify: extractdiskburnin
-  register: tar
-
-- name: Wait for disk burn-in script installation to complete
-  ansible.builtin.meta: flush_handlers
 
 - name: Install SMART-reporting script
   ansible.builtin.template:
