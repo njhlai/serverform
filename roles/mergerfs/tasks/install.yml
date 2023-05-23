@@ -1,8 +1,7 @@
 ---
 # Filesystem utils installation
-- name: Install xfsprogs for xfs
+- name: Install mergerfs and fuse
   become: true
   ansible.builtin.apt:
-    name: xfsprogs
+    name: ['mergerfs', 'fuse']
     state: present
-  when: '"xfs" in disks | map(attribute="fs") | list'

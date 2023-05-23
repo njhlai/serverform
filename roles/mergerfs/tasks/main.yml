@@ -1,10 +1,8 @@
 ---
 # mergerfs: Role for mergerfs
-- name: Install mergerfs and fuse
-  become: true
-  ansible.builtin.apt:
-    name: ['mergerfs', 'fuse']
-    state: present
+- name: Import filesystem utils installation tasks
+  ansible.builtin.import_tasks:
+    file: install.yml
 
 - name: Get package info
   ansible.builtin.package_facts:
@@ -13,10 +11,6 @@
 - name: Set caching option
   ansible.builtin.set_fact:
     mergerfscache: "{{ 'cache.files=off' if ansible_facts.packages['mergerfs'][0].version is version('2.28', '>=') else 'direct_io' }}"
-
-- name: Import filesystem utils installation tasks
-  ansible.builtin.import_tasks:
-    file: install.yml
 
 - name: Import pool configuration tasks
   ansible.builtin.import_tasks:

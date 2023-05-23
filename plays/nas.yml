@@ -12,6 +12,6 @@
   roles:
     - diskconf
     - mergerfs
+    - samba
     - bminor
     - softserve
-    - samba
