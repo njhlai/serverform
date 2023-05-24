@@ -58,3 +58,21 @@
 
 - name: Wait for Soft Serve service to restart
   ansible.builtin.meta: flush_handlers
+
+- name: Clone Soft Serve config repo
+  ansible.builtin.git:
+    repo: "ssh://{{ inventory_hostname }}:{{ soft_serve_ssh_port }}/.soft-serve"
+    dest: "{{ local_soft_serve_config_repo }}"
+    version: main
+  delegate_to: localhost
+
+- name: Configure Soft Serve server's README
+  ansible.builtin.template:
+    src: README.md.j2
+    dest: "{{ local_soft_serve_config_repo }}/README.md"
+    mode: 0644
+  delegate_to: localhost
+  notify: commitreadmeupdate
+
+- name: Wait for config repo to complete update
+  ansible.builtin.meta: flush_handlers

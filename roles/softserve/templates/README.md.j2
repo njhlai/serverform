@@ -1,0 +1,8 @@
+<!-- This file is managed by Ansible, don't make changes here, they will be overwritten. -->
+# {{ soft_serve_name }}: Git server powered by Soft Serve
+
+Welcome! Configure {{ soft_serve_name }} by cloning the `.soft-serve` repo and pushing changes.
+
+```sh
+git clone ssh://{{ inventory_hostname }}:{{ soft_serve_ssh_port }}/.soft-serve
+```

@@ -14,3 +14,24 @@
     masked: false
     scope: user
   listen: enablerestartsoftserve
+
+- name: Commit README.md update
+  environment:
+    GIT_AUTHOR_NAME: "Ansible"
+    GIT_AUTHOR_EMAIL: "ansible@{{ lookup('env', 'USER') }}"
+  lvrfrc87.git_acp.git_acp:
+    add: ["README.md"]
+    branch: main
+    comment: "Ansible-generated README update"
+    path: "{{ local_soft_serve_config_repo }}"
+    push: false
+    url: "ssh://{{ inventory_hostname }}:{{ soft_serve_ssh_port }}/.soft-serve"
+  delegate_to: localhost
+  notify: verifyandpush
+  listen: commitreadmeupdate
+
+
+- name: Verify commit and push update
+  ansible.builtin.pause:
+    prompt: "Verify README.md is updated correctly and push changes"
+  listen: verifyandpush
