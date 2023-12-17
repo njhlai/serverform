@@ -1,5 +1,14 @@
 ---
 profile: production
 
+enable_list:
+  - args
+  - empty-string-compare
+  - name[prefix]
+  - no-log-password
+  - no-same-owner
+
 warn_list:
   - yaml[line-length]
+
+offline: true
