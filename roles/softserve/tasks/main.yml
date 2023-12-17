@@ -2,7 +2,7 @@
 # softserve: Role for Soft Serve
 - name: Ensure repo directory exists
   ansible.builtin.file:
-    path: "{{ soft_serve_data }}"
+    path: "{{ softserve_data }}"
     state: directory
     mode: 0755
 
@@ -41,7 +41,7 @@
 - name: Install config for Soft Serve
   ansible.builtin.template:
     src: config.yaml.j2
-    dest: "{{ soft_serve_data }}/config.yaml"
+    dest: "{{ softserve_data }}/config.yaml"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0644
@@ -61,15 +61,15 @@
 
 - name: Clone Soft Serve config repo
   ansible.builtin.git:
-    repo: "ssh://{{ inventory_hostname }}:{{ soft_serve_ssh_port }}/.soft-serve"
-    dest: "{{ local_soft_serve_config_repo }}"
+    repo: "ssh://{{ inventory_hostname }}:{{ softserve_ssh_port }}/.soft-serve"
+    dest: "{{ local_softserve_config_repo }}"
     version: main
   delegate_to: localhost
 
 - name: Configure Soft Serve server's README
   ansible.builtin.template:
     src: README.md.j2
-    dest: "{{ local_soft_serve_config_repo }}/README.md"
+    dest: "{{ local_softserve_config_repo }}/README.md"
     mode: 0644
   delegate_to: localhost
   notify: commitreadmeupdate

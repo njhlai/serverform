@@ -1,13 +1,13 @@
 ---
 # Pi-hole installation
-- name: Clone git repo for installation
+- name: install | Clone git repo for installation
   ansible.builtin.git:
     repo: https://github.com/pi-hole/pi-hole.git
     dest: /tmp/pi-hole
     version: master
     depth: 1
 
-- name: Configure Pi-Hole
+- name: install | Configure Pi-Hole
   become: true
   ansible.builtin.copy:
     src: "{{ setup_conf }}"
@@ -16,13 +16,13 @@
     group: root
     mode: 0644
 
-- name: Run install script unattended
+- name: install | Run install script unattended
   become: true
   ansible.builtin.command:
     cmd: 'bash /tmp/pi-hole/automated\ install/basic-install.sh --unattended'
     creates: /usr/local/bin/pihole
 
-- name: Clean git repo
+- name: install | Clean git repo
   ansible.builtin.file:
     path: /tmp/pi-hole
     state: absent

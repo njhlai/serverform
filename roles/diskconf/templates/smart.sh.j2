@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ### Parameters ###
-logfile="{{ logfile }}"
+logfile="{{ diskconf_logfile }}"
 {% if reporting_email %}
 email="{{ reporting_email }}"
 {% endif %}
@@ -10,10 +10,10 @@ ping="{{ hcio_ping }}"
 {% endif %}
 subject="SMART Status Report for Drives in {{ ansible_hostname }}"
 drives="{{ disks | map(attribute='name') | join(' ') }}"
-tempWarn={{ temp_warn }}
-tempCrit={{ temp_crit }}
-sectorsCrit={{ sectors_crit }}
-testAgeWarn={{ test_age_warn }}
+tempWarn={{ diskconf_temp_warn }}
+tempCrit={{ diskconf_temp_crit }}
+sectorsCrit={{ diskconf_sectors_crit }}
+testAgeWarn={{ diskconf_test_age_warn }}
 warnSymbol="?"
 critSymbol="!"
 

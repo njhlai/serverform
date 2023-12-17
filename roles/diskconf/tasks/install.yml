@@ -1,25 +1,25 @@
 ---
 # Requirements and scripts installation
-- name: Install e2fsprogs and smartmontools
+- name: install | Install e2fsprogs and smartmontools
   become: true
   ansible.builtin.apt:
     name: ['e2fsprogs', 'smartmontools']
     state: present
 
-- name: Install xfsprogs for xfs
+- name: install | Install xfsprogs for xfs
   become: true
   ansible.builtin.apt:
     name: xfsprogs
     state: present
   when: '"xfs" in disks | map(attribute="fs") | list'
 
-- name: Ensure directory for scripts exists
+- name: install | Ensure directory for scripts exists
   ansible.builtin.file:
     path: ~/.scripts
     state: directory
     mode: 0775
 
-- name: Install SMART-reporting script
+- name: install | Install SMART-reporting script
   ansible.builtin.template:
     src: smart.sh.j2
     dest: ~/.scripts/smart.sh
@@ -27,7 +27,7 @@
     group: "{{ ansible_user }}"
     mode: 0774
 
-- name: Creates a cronjob in /etc/cron.d to report SMART status
+- name: install | Creates a cronjob in /etc/cron.d to report SMART status
   become: true
   ansible.builtin.cron:
     name: weekly SMART reporting

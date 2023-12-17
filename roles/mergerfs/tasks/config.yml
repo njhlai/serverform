@@ -1,6 +1,6 @@
 ---
 # Pool configuration
-- name: Create /mnt points for pools
+- name: config | Create /mnt points for pools
   become: true
   ansible.builtin.file:
     dest: "{{ item.mnt }}"
@@ -11,12 +11,12 @@
   with_items:
     - "{{ fspools }}"
 
-- name: Mount pools
+- name: config | Mount pools
   become: true
   ansible.posix.mount:
     path: "{{ item.mnt }}"
     src: "{{ item.src }}"
-    opts: "use_ino,{{ mergerfscache }},dropcacheonclose=true,category.create=mfs,allow_other,minfreespace=50G,fsname=mergerfs"
+    opts: "use_ino,{{ mergerfscache }},dropcacheonclose=true,category.create=mfs,allow_other,minfreespace=50G,fsname=mergerfs"  # yamllint disable-line rule:line-length
     fstype: fuse.mergerfs
     state: mounted
   with_items: "{{ fspools }}"

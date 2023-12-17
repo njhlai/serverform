@@ -1,6 +1,6 @@
 ---
 # SSH configuration
-- name: Create SSH key for server
+- name: config | Create SSH key for server
   become: true
   ansible.builtin.user:
     name: root

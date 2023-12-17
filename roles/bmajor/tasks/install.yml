@@ -1,12 +1,12 @@
 ---
 # rsnapshot installation
-- name: Install rsnapshot
+- name: install | Install rsnapshot
   become: true
   ansible.builtin.apt:
     name: rsnapshot
     state: present
 
-- name: Install rsnapshot config
+- name: install | Install rsnapshot config
   become: true
   ansible.builtin.template:
     src: rsnapshot.conf.j2
@@ -16,7 +16,7 @@
     mode: 0644
     backup: true
 
-- name: Creates a cronjob in /etc/cron.d to run rsnapshot
+- name: install | Creates a cronjob in /etc/cron.d to run rsnapshot
   become: true
   ansible.builtin.cron:
     name: "{{ item.name }}"
@@ -28,5 +28,5 @@
     minute: "{{ item.minute | default('*') }}"
     job: "{{ item.job }}"
     cron_file: rsnapshot
-  with_items: "{{ rsnapshot_crontab }}"
+  with_items: "{{ bmajor_rsnapshot_crontab }}"
   when: online

@@ -1,6 +1,6 @@
 ---
 # Disks configuration
-- name: Partition disks
+- name: config | Partition disks
   become: true
   community.general.parted:
     device: "/dev/disk/by-id/ata-{{ item.name }}"
@@ -10,7 +10,7 @@
     state: present
   with_items: "{{ disks }}"
 
-- name: Format disks
+- name: config | Format disks
   become: true
   community.general.filesystem:
     dev: "/dev/disk/by-id/ata-{{ item.name }}-part1"
@@ -18,7 +18,7 @@
     state: present
   with_items: "{{ disks }}"
 
-- name: Create /mnt points for disks
+- name: config | Create /mnt points for disks
   become: true
   ansible.builtin.file:
     path: "{{ item.mnt }}"
@@ -29,7 +29,7 @@
   with_items:
     - "{{ disks }}"
 
-- name: Mount disks
+- name: config | Mount disks
   become: true
   ansible.posix.mount:
     path: "{{ item.mnt }}"
@@ -40,5 +40,5 @@
   notify: ensurecorrectperms
   register: mounted
 
-- name: Wait for mounted drives to have correct permissions
+- name: config | Wait for mounted drives to have correct permissions
   ansible.builtin.meta: flush_handlers

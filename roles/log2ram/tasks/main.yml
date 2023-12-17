@@ -3,7 +3,7 @@
 - name: Insert required repo into sources.list.d
   become: true
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/azlux.gpg] http://packages.azlux.fr/debian/ {{ ansible_distribution_release }} main"
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/azlux.gpg] http://packages.azlux.fr/debian/ {{ ansible_distribution_release }} main"  # yamllint disable-line rule:line-length
     filename: azlux
     state: present
     mode: 0644

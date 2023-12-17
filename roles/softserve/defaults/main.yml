@@ -1,7 +1,7 @@
 ---
-soft_serve_ssh_port: 23231
-soft_serve_git_port: 9418
-soft_serve_http_port: 23232
-soft_serve_stats_port: 23233
-soft_serve_server_key: "ssh/server_ed25519"
-soft_serve_client_key: "ssh/client_ed25519"
+softserve_ssh_port: 23231
+softserve_git_port: 9418
+softserve_http_port: 23232
+softserve_stats_port: 23233
+softserve_server_key: "ssh/server_ed25519"
+softserve_client_key: "ssh/client_ed25519"

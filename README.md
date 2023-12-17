@@ -14,7 +14,7 @@ ansible-galaxy collection install -r requirements.yml
 ```
 
 ## Usage
-Supply ServerForm with an Ansible-acceptable inventory file (see [Ansible's documentation for inventory](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)) which details your server setup and specify the path via the `INVENTORY` argument in `ansible.cfg`.
+Supply ServerForm with an Ansible-acceptable inventory file (see [Ansible's documentation for inventory](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)) which details your server setup and specify the path via the `inventory` argument in `ansible.cfg`.
 
 To run a playbook:
 ```sh

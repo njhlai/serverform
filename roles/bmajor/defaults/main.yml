@@ -1,7 +1,7 @@
 ---
 # rsnapshot config options
-# rsnapshot_config_snapshot_root:
-rsnapshot_config_intervals:
+# bmajor_rsnapshot_config_snapshot_root:
+bmajor_rsnapshot_config_intervals:
   - name: hourly
     value: 24
   - name: daily
@@ -10,12 +10,12 @@ rsnapshot_config_intervals:
     value: 4
   - name: monthly
     value: 12
-rsnapshot_config_verbose: 2
-rsnapshot_config_loglevel: 3
-rsnapshot_config_rsync_long_args: >-
+bmajor_rsnapshot_config_verbose: 2
+bmajor_rsnapshot_config_loglevel: 3
+bmajor_rsnapshot_config_rsync_long_args: >-
   --delete --numeric-ids --relative --delete-excluded --rsync-path=rsync-wrapper.sh
-rsnapshot_config_include: []
-rsnapshot_config_exclude:
+bmajor_rsnapshot_config_include: []
+bmajor_rsnapshot_config_exclude:
   - 'temp.*'
   - '*~'
   - '.*~'
@@ -30,7 +30,7 @@ rsnapshot_config_exclude:
   - '/lost+found/**'
 
 # snapshot crontab settings
-rsnapshot_crontab:
+bmajor_rsnapshot_crontab:
   # - name: hourly snapshot
   #   month: '*'
   #   weekday: '*'

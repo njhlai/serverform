@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 Restart=always
 RestartSec=1
-Environment=SOFT_SERVE_DATA_PATH="{{ soft_serve_data }}"
+Environment=SOFT_SERVE_DATA_PATH="{{ softserve_data }}"
 ExecStart=/usr/bin/soft serve
 
 [Install]

@@ -18,7 +18,10 @@
     weekday: "0"
     hour: "4"
     minute: "0"
-    job: "PATH='$PATH:/usr/sbin:/usr/local/bin/' pihole updateGravity | tail | curl -fsS --retry 5 --data-binary @- {{ hcio_ping }}"
+    job: >-
+      PATH='$PATH:/usr/sbin:/usr/local/bin/' pihole updateGravity |
+      tail |
+      curl -fsS --retry 5 --data-binary @- {{ hcio_ping }}
     cron_file: gravity
 
 - name: Update Pi-hole

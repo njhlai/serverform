@@ -4,7 +4,7 @@
 #################################################
 
 # The name of the server.
-name: "{{ soft_serve_name }}"
+name: "{{ softserve_name }}"
 
 # Logging configuration.
 log:
@@ -14,19 +14,19 @@ log:
 # The SSH server configuration.
 ssh:
   # The address on which the SSH server will listen.
-  listen_addr: ":{{ soft_serve_ssh_port }}"
+  listen_addr: ":{{ softserve_ssh_port }}"
 
   # The public URL of the SSH server.
   # This is the address that will be used to clone repositories.
-  public_url: "ssh://{{ ansible_hostname }}:{{ soft_serve_ssh_port }}"
+  public_url: "ssh://{{ ansible_hostname }}:{{ softserve_ssh_port }}"
 
   # The path to the SSH server's private key.
-  key_path: {{ soft_serve_server_key }}
+  key_path: {{ softserve_server_key }}
 
   # The path to the SSH server's client private key.
   # This key will be used to authenticate the server to make git requests to
   # ssh remotes.
-  client_key_path: {{ soft_serve_client_key }}
+  client_key_path: {{ softserve_client_key }}
 
   # The maximum number of seconds a connection can take.
   # A value of 0 means no timeout.
@@ -38,7 +38,7 @@ ssh:
 # The Git daemon configuration.
 git:
   # The address on which the Git daemon will listen.
-  listen_addr: ":{{ soft_serve_git_port }}"
+  listen_addr: ":{{ softserve_git_port }}"
 
   # The maximum number of seconds a connection can take.
   # A value of 0 means no timeout.
@@ -53,7 +53,7 @@ git:
 # The HTTP server configuration.
 http:
   # The address on which the HTTP server will listen.
-  listen_addr: ":{{ soft_serve_http_port }}"
+  listen_addr: ":{{ softserve_http_port }}"
 
   # The path to the TLS private key.
   tls_key_path: ""
@@ -64,9 +64,9 @@ http:
   # The public URL of the HTTP server.
   # This is the address that will be used to clone repositories.
   # Make sure to use https:// if you are using TLS.
-  public_url: "http://{{ ansible_hostname }}:{{ soft_serve_http_port }}"
+  public_url: "http://{{ ansible_hostname }}:{{ softserve_http_port }}"
 
 # The stats server configuration.
 stats:
   # The address on which the stats server will listen.
-  listen_addr: ":{{ soft_serve_stats_port }}"
+  listen_addr: ":{{ softserve_stats_port }}"

@@ -1,6 +1,6 @@
 ---
 # SSH configuration for backup pulling
-- name: Install the `rsync-wrapper.sh` script, called by bmajor
+- name: config | Install the `rsync-wrapper.sh` script, called by bmajor
   become: true
   ansible.builtin.copy:
     src: rsync-wrapper.sh
@@ -9,7 +9,7 @@
     group: root
     mode: 0774
 
-- name: Retrieve the SSH public key on bmajor
+- name: config | Retrieve the SSH public key on bmajor
   delegate_to: bmajor_host
   remote_user: root
   ansible.builtin.command:
@@ -17,7 +17,7 @@
   register: bmajor_ssh_pubkey
   changed_when: false
 
-- name: Set the SSH public key for the backup system user
+- name: config | Set the SSH public key for the backup system user
   become: true
   ansible.posix.authorized_key:
     user: bminor

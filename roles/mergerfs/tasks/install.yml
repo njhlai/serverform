@@ -1,6 +1,6 @@
 ---
 # Filesystem utils installation
-- name: Install mergerfs and fuse
+- name: install | Install mergerfs and fuse
   become: true
   ansible.builtin.apt:
     name: ['mergerfs', 'fuse']
