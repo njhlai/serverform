@@ -1,5 +1,4 @@
 ---
-# diskconf SMART reporting options
 diskconf_logfile: /tmp/smart_report.tmp
 diskconf_temp_warn: 40
 diskconf_temp_crit: 45

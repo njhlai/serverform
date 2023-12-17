@@ -1,6 +1,4 @@
 ---
-# rsnapshot config options
-# bmajor_rsnapshot_config_snapshot_root:
 bmajor_rsnapshot_config_intervals:
   - name: hourly
     value: 24
@@ -29,22 +27,21 @@ bmajor_rsnapshot_config_exclude:
   - '/tmp/**'
   - '/lost+found/**'
 
-# snapshot crontab settings
 bmajor_rsnapshot_crontab:
-  # - name: hourly snapshot
-  #   month: '*'
-  #   weekday: '*'
-  #   day: '*'
-  #   hour: '*/4'
-  #   minute: 0
-  #   job: "/usr/bin/rsnapshot hourly"
-  # - name: daily snapshot
-  #   month: '*'
-  #   weekday: '*'
-  #   day: '*'
-  #   hour: 4
-  #   minute: 0
-  #   job: "/usr/bin/rsnapshot daily"
+  - name: hourly snapshot
+    month: '*'
+    weekday: '*'
+    day: '*'
+    hour: '*/4'
+    minute: 0
+    job: "/usr/bin/rsnapshot hourly"
+  - name: daily snapshot
+    month: '*'
+    weekday: '*'
+    day: '*'
+    hour: 4
+    minute: 0
+    job: "/usr/bin/rsnapshot daily"
   - name: weekly snapshot
     month: '*'
     weekday: 6
